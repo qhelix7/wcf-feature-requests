@@ -1,0 +1,20 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+ptipython = "*"
+pytest = "*"
+
+[packages]
+flask = "*"
+flask-sqlalchemy = "*"
+gunicorn = "*"
+python-dotenv = "*"
+alembic = "*"
+psycopg2 = "*"
+feature-server = {editable = true,path = "."}
+
+[requires]
+python_version = "3.7"
