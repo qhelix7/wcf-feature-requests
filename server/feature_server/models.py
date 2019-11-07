@@ -21,7 +21,11 @@ class FeatureRequest(db.Model):
         db.ForeignKey("client.id"),
         nullable=False,
     )
-    client = db.relationship(Client, backref="feature_requests")
+    client = db.relationship(
+        'Client',
+        backref=db.backref("feature_requests"),
+        lazy=True,
+    )
     priority = db.Column(
         db.Enum(
             "Undetermined",
@@ -39,3 +43,14 @@ class FeatureRequest(db.Model):
         default=datetime.utcnow,
         nullable=False,
     )
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "client": self.client.name,
+            "priority": self.priority,
+            "target_date": self.target_date.isoformat()[:10],
+            "created_at": self.created_at.isoformat()[:10],
+        }
